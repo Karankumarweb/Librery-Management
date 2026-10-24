@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports &amp; Analytics | Athenaeum Library</title>
+  <meta name="description" content="Generate circulation summaries, inventory audits, overdue fine ledgers, and CSV exports." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/reports.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item"><a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item"><a href="/suppliers.html"><i data-lucide="truck" style="width: 18px; height: 18px;"></i><span>Suppliers</span></a></li>
+            <li class="nav-item active"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+            <li class="nav-item"><a href="/notifications.html"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span>Notifications</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Analytics &amp; Reports</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="reports-page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Circulation &amp; Collection Reports</h1>
+            <p class="page-subtitle">Real-time reports derived from persistent local library transaction records.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="print-report-btn">
+              <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+              Print Report
+            </button>
+            <button class="btn btn-primary" id="export-report-csv-btn">
+              <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Report Tabs Selector Toolbar -->
+        <div class="report-controls-bar">
+          <div class="segmented-tabs" style="flex-wrap: wrap;">
+            <button class="tab-btn report-type-btn active" data-report="inventory">
+              Inventory &amp; Holdings
+            </button>
+            <button class="tab-btn report-type-btn" data-report="overdue">
+              Overdue Delinquency
+            </button>
+            <button class="tab-btn report-type-btn" data-report="members">
+              Member Utilization
+            </button>
+            <button class="tab-btn report-type-btn" data-report="fines">
+              Fines Collection
+            </button>
+            <button class="tab-btn report-type-btn" data-report="categories">
+              Category Distribution
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Summary Stats Cards -->
+        <div class="report-grid-3" id="report-summary-cards">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <!-- Report Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title" id="report-active-title">Books Inventory Report</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead id="report-table-header"></thead>
+              <tbody id="report-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/reports.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

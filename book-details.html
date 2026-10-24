@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Details | Athenaeum Library Management System</title>
+  <meta name="description" content="Detailed volume information, shelf location, copy availability, and loan history." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/books.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item active"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+            <li class="nav-item"><a href="/categories.html"><i data-lucide="layers" style="width: 18px; height: 18px;"></i><span>Categories</span></a></li>
+            <li class="nav-item"><a href="/authors.html"><i data-lucide="users" style="width: 18px; height: 18px;"></i><span>Authors</span></a></li>
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <div class="breadcrumb-trail">
+            <a href="/books.html">Catalog</a>
+            <span class="separator">/</span>
+            <span class="current-crumb" id="breadcrumb-book-title">Book Details</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/books.html" class="btn btn-secondary btn-sm">
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            Back to Catalog
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container">
+        <div id="book-details-content">
+          <!-- Loaded dynamically via script -->
+        </div>
+
+        <!-- Circulation History Table -->
+        <div class="card" style="margin-top: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Circulation &amp; Borrowing History</h3>
+              <p class="card-subtitle">Active and past loans for this title</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Borrower</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="book-loans-body">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const bookId = params.get('id') || 'BK-1001';
+
+      const books = window.StorageManager.getBooks();
+      const book = books.find(b => b.id === bookId);
+
+      if (!book) {
+        document.getElementById('book-details-content').innerHTML = `
+          <div class="empty-state">
+            <h2 class="empty-title">Book Record Not Found</h2>
+            <p class="empty-desc">The book identifier ${window.Utils.escapeHTML(bookId)} does not exist in our library records.</p>
+            <a href="/books.html" class="btn btn-primary">Return to Catalog</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById('breadcrumb-book-title').textContent = book.title;
+
+      const isAvail = parseInt(book.availableCopies, 10) > 0;
+      const statusBadge = isAvail 
+        ? `<span class="badge badge-success">${book.availableCopies} Copies Available</span>`
+        : `<span class="badge badge-danger">Out of Stock / In Circulation</span>`;
+
+      document.getElementById('book-details-content').innerHTML = `
+        <div class="book-details-layout">
+          <div>
+            <img src="${book.coverImage}" alt="${window.Utils.escapeHTML(book.title)}" class="book-details-poster" />
+            <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;">
+              ${isAvail ? `
+                <a href="/issue-book.html?bookId=${book.id}" class="btn btn-primary btn-lg" style="width: 100%;">
+                  <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+                  Issue Book to Patron
+                </a>
+              ` : `
+                <a href="/reservations.html" class="btn btn-warning btn-lg" style="width: 100%; background: var(--warning); color: #ffffff;">
+                  <i data-lucide="bookmark" style="width: 18px; height: 18px;"></i>
+                  Place Hold in Queue
+                </a>
+              `}
+              <a href="/books.html" class="btn btn-secondary" style="width: 100%;">
+                Browse More Volumes
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+              <span class="badge badge-neutral font-mono">${book.id}</span>
+              ${statusBadge}
+            </div>
+
+            <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; letter-spacing: -0.02em;">
+              ${window.Utils.escapeHTML(book.title)}
+            </h1>
+
+            <div style="font-size: 1.125rem; color: var(--accent-600); font-weight: 600; margin-top: 0.375rem;">
+              By ${window.Utils.escapeHTML(book.author)}
+            </div>
+
+            <p style="font-size: 0.9375rem; color: var(--text-muted); line-height: 1.6; margin-top: 1.25rem;">
+              ${window.Utils.escapeHTML(book.description || 'No detailed abstract recorded for this edition.')}
+            </p>
+
+            <div class="book-meta-grid">
+              <div class="meta-item">
+                <span class="meta-item-label">ISBN-13 Number</span>
+                <span class="meta-item-value font-mono">${book.isbn}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Department / Discipline</span>
+                <span class="meta-item-value">${window.Utils.escapeHTML(book.category)}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Publisher</span>
+                <span class="meta-item-value">${window.Utils.escapeHTML(book.publisher || 'Academic Press')}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Publication Year</span>
+                <span class="meta-item-value tabular-nums">${book.publicationYear || 'N/A'}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Shelf Stacks Location</span>
+                <span class="shelf-tag">Shelf ${window.Utils.escapeHTML(book.shelfNumber)}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Circulation Inventory</span>
+                <span class="meta-item-value tabular-nums"><strong>${book.availableCopies}</strong> Available / ${book.totalCopies} Total</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render book loan history
+      const loans = window.StorageManager.getLoans().filter(l => l.bookId === book.id);
+      const loansBody = document.getElementById('book-loans-body');
+
+      if (loans.length === 0) {
+        loansBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">No loan records exist for this title yet.</td></tr>`;
+      } else {
+        loansBody.innerHTML = loans.map(l => {
+          let badge = 'badge-info';
+          if (l.status === 'Returned') badge = 'badge-success';
+          if (l.status === 'Overdue') badge = 'badge-danger';
+
+          return `
+            <tr>
+              <td class="font-mono tabular-nums"><strong>${l.id}</strong></td>
+              <td>${window.Utils.escapeHTML(l.memberName)} (${l.memberId})</td>
+              <td class="tabular-nums">${window.Utils.formatDate(l.issueDate)}</td>
+              <td class="tabular-nums">${window.Utils.formatDate(l.dueDate)}</td>
+              <td class="tabular-nums">${l.returnDate ? window.Utils.formatDate(l.returnDate) : 'Active'}</td>
+              <td><span class="badge ${badge}">${l.status}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

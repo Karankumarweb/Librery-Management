@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Athenaeum Library Management System</title>
+  <meta name="description" content="Sign in to the Athenaeum Library Management System. Role-based access for Administrators, Librarians, and Patrons." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/auth.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <!-- Brand Storytelling Left Panel -->
+    <div class="auth-sidebar">
+      <div class="auth-sidebar-brand">
+        <div class="brand-icon">
+          <i data-lucide="book-marked" style="width: 18px; height: 18px;"></i>
+        </div>
+        <span>ATHENAEUM</span>
+      </div>
+
+      <div class="auth-hero-content">
+        <h2 class="auth-hero-title">
+          Enterprise Academic Library Management
+        </h2>
+        <p class="auth-hero-desc">
+          Automated collection cataloging, real-time circulation tracking, hold reservations, fine accounting, and institutional analytics.
+        </p>
+
+        <div class="auth-features-list">
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon">
+              <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+            </div>
+            <span>32+ Pre-seeded Academic Titles with ISBN Validation</span>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon">
+              <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+            </div>
+            <span>Automated Inventory Increments &amp; Overdue Fines</span>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon">
+              <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+            </div>
+            <span>Comprehensive CSV Reporting &amp; Print Ready Receipts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-sidebar-footer">
+        &copy; 2026 Athenaeum University Library System · Cambridge, MA
+      </div>
+    </div>
+
+    <!-- Login Form Right Panel -->
+    <main class="auth-main">
+      <div class="auth-card">
+        <div class="auth-header">
+          <a href="/" style="font-size: 0.8125rem; color: var(--accent-500); font-weight: 600; display: inline-flex; align-items: center; gap: 0.375rem; margin-bottom: 1.5rem;">
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            Back to Public Library
+          </a>
+          <h1 class="auth-title">Welcome to Athenaeum</h1>
+          <p class="auth-subtitle">Select a demo role or sign in with your credentials.</p>
+        </div>
+
+        <!-- Demo Role Switcher Tabs -->
+        <div style="margin-bottom: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+          Quick Demo Role Selection
+        </div>
+        <div class="demo-role-selector" id="role-selector">
+          <button type="button" class="role-btn active" data-role="admin">
+            Administrator
+          </button>
+          <button type="button" class="role-btn" data-role="librarian">
+            Librarian
+          </button>
+          <button type="button" class="role-btn" data-role="member">
+            Patron / Member
+          </button>
+        </div>
+
+        <!-- Demo Warning Callout -->
+        <div class="demo-warning-callout">
+          <i data-lucide="alert-circle" style="width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px;"></i>
+          <div>
+            <strong>Frontend-Only Application:</strong> Simulated authentication using local browser storage. No credentials are transmitted to a backend server.
+          </div>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form" id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">
+              Email Address <span class="required">*</span>
+            </label>
+            <div class="input-with-icon">
+              <span class="input-icon">
+                <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+              </span>
+              <input type="email" id="login-email" class="form-control" placeholder="name@athenaeum.edu" required />
+            </div>
+            <span class="form-error" id="login-email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">
+              Password <span class="required">*</span>
+            </label>
+            <div class="input-with-icon">
+              <span class="input-icon">
+                <i data-lucide="lock" style="width: 16px; height: 16px;"></i>
+              </span>
+              <input type="password" id="login-password" class="form-control" placeholder="••••••••" required />
+              <button type="button" class="input-action-btn" id="toggle-password-btn" aria-label="Toggle password visibility">
+                <i data-lucide="eye" id="password-eye-icon" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+            <span class="form-error" id="login-password-error"></span>
+          </div>
+
+          <div class="auth-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember-me" class="custom-checkbox" checked />
+              <span>Remember this session</span>
+            </label>
+            <a href="#" class="auth-link" onclick="window.Utils.showToast('Demo mode: Click any role button above to reset credentials', 'info'); return false;">
+              Forgot password?
+            </a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+            Sign In to Dashboard
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Don't have a library card yet? 
+          <a href="/register.html" class="auth-link">Register for membership</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      const emailInput = document.getElementById('login-email');
+      const passInput = document.getElementById('login-password');
+      let currentRole = 'Administrator';
+
+      // Default to admin
+      emailInput.value = window.DEMO_CREDENTIALS.admin.email;
+      passInput.value = window.DEMO_CREDENTIALS.admin.password;
+
+      // Role pill buttons
+      const roleBtns = document.querySelectorAll('.role-btn');
+      roleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          roleBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const roleKey = btn.getAttribute('data-role');
+          const cred = window.DEMO_CREDENTIALS[roleKey];
+          if (cred) {
+            emailInput.value = cred.email;
+            passInput.value = cred.password;
+            currentRole = cred.role;
+            window.Utils.showToast(`Autofilled demo credentials for ${cred.role}`, 'info');
+          }
+        });
+      });
+
+      // Show / Hide password toggle
+      const togglePassBtn = document.getElementById('toggle-password-btn');
+      const eyeIcon = document.getElementById('password-eye-icon');
+      if (togglePassBtn) {
+        togglePassBtn.addEventListener('click', () => {
+          const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+          passInput.setAttribute('type', type);
+          if (type === 'text') {
+            togglePassBtn.innerHTML = '<i data-lucide="eye-off" style="width: 16px; height: 16px;"></i>';
+          } else {
+            togglePassBtn.innerHTML = '<i data-lucide="eye" style="width: 16px; height: 16px;"></i>';
+          }
+          if (window.lucide) window.lucide.createIcons();
+        });
+      }
+
+      // Handle form submit
+      const form = document.getElementById('login-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        window.Validation.clearAllErrors(form);
+
+        const email = emailInput.value.trim();
+        const password = passInput.value.trim();
+
+        if (!email) {
+          window.Validation.setFieldError(emailInput, 'Email is required');
+          return;
+        }
+        if (!password) {
+          window.Validation.setFieldError(passInput, 'Password is required');
+          return;
+        }
+
+        const res = window.Auth.login(email, password, currentRole);
+        if (res.success) {
+          window.Utils.showToast(`Signed in as ${res.user.name} (${res.user.role})`, 'success');
+          
+          // Check redirect url param
+          const params = new URLSearchParams(window.location.search);
+          const redirectUrl = params.get('redirect') ? decodeURIComponent(params.get('redirect')) : '/dashboard.html';
+          
+          setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 600);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

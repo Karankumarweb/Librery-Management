@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Issue Book | Athenaeum Circulation Desk</title>
+  <meta name="description" content="Circulation checkout desk: issue volumes to active members, calculate loan durations, and generate receipts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item active"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item"><a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item admin-only"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+            <li class="nav-item"><a href="/notifications.html"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span>Notifications</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Circulation</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Issue Book to Patron</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="issue-book-page-container" style="max-width: 900px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Circulation Loan Checkout</h1>
+            <p class="page-subtitle">Verify borrower membership status, select available copies, and authorize transaction.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <form id="issue-book-form">
+            <div class="card-body" style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <!-- 1. Select Member -->
+              <div>
+                <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent-50); color: var(--accent-500); display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">1</span>
+                  Select Borrower Member
+                </h3>
+                <div class="form-group">
+                  <label class="form-label" for="issue-member-select">Patron Account <span class="required">*</span></label>
+                  <select id="issue-member-select" class="form-control" required></select>
+                </div>
+                <div id="selected-member-card" class="card" style="margin-top: 0.75rem; padding: 1rem; background: var(--bg-subtle); display: none;"></div>
+              </div>
+
+              <!-- 2. Select Book -->
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+                <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent-50); color: var(--accent-500); display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">2</span>
+                  Select Volume to Loan
+                </h3>
+                <div class="form-group">
+                  <label class="form-label" for="issue-book-select">Catalog Item <span class="required">*</span></label>
+                  <select id="issue-book-select" class="form-control" required></select>
+                </div>
+                <div id="selected-book-card" class="card" style="margin-top: 0.75rem; padding: 1rem; background: var(--bg-subtle); display: none;"></div>
+              </div>
+
+              <!-- 3. Circulation Dates -->
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+                <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent-50); color: var(--accent-500); display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">3</span>
+                  Circulation Dates &amp; Loan Period
+                </h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="issue-date-input">Issue Date</label>
+                    <input type="date" id="issue-date-input" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="due-date-input">Mandatory Due Date <span class="required">*</span></label>
+                    <input type="date" id="due-date-input" class="form-control" required />
+                  </div>
+                </div>
+                <div class="form-helper" style="margin-top: 0.5rem;">
+                  Standard duration is 14 days according to library institutional policy.
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer" style="justify-content: flex-end;">
+              <a href="/dashboard.html" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary btn-lg">
+                <i data-lucide="check-circle" style="width: 18px; height: 18px;"></i>
+                Authorize &amp; Issue Volume
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Loan Receipt Modal -->
+  <div class="modal-overlay" id="receipt-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Loan Authorization Receipt</h3>
+        <button class="modal-close-btn" id="receipt-modal-close" aria-label="Close dialog"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <div class="modal-body" id="receipt-modal-content"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="receipt-modal-print"><i data-lucide="printer" style="width: 16px; height: 16px;"></i> Print Receipt</button>
+        <button class="btn btn-primary" onclick="window.location.href='/dashboard.html'">Return to Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/issue-book.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

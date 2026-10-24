@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Author Directory | Athenaeum Library</title>
+  <meta name="description" content="Browse scholarly authors, biographic entries, and associated academic works." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Collection &amp; Catalog</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+            <li class="nav-item"><a href="/categories.html"><i data-lucide="layers" style="width: 18px; height: 18px;"></i><span>Categories</span></a></li>
+            <li class="nav-item active"><a href="/authors.html"><i data-lucide="users" style="width: 18px; height: 18px;"></i><span>Authors</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item"><a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item admin-only"><a href="/suppliers.html"><i data-lucide="truck" style="width: 18px; height: 18px;"></i><span>Suppliers</span></a></li>
+            <li class="nav-item admin-only"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+            <li class="nav-item"><a href="/notifications.html"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span>Notifications</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Author Directory</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="authors-page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Author &amp; Scholar Directory</h1>
+            <p class="page-subtitle">Biographical metadata, scholarly affiliations, and works cataloged in our collections.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="open-add-author-btn">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+              Add Author
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="input-with-icon" style="flex: 1; max-width: 420px;">
+            <span class="input-icon"><i data-lucide="search" style="width: 16px; height: 16px;"></i></span>
+            <input type="text" id="author-search-input" class="form-control" placeholder="Search authors by name, country, or bio..." />
+          </div>
+        </div>
+
+        <div class="books-grid" id="authors-grid">
+          <!-- Loaded dynamically -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Author Modal -->
+  <div class="modal-overlay" id="author-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title" id="author-modal-title">Add Author Profile</h3>
+        <button class="modal-close-btn" id="author-modal-close" aria-label="Close dialog"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <form id="author-form">
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="author-form-name">Author Name <span class="required">*</span></label>
+            <input type="text" id="author-form-name" class="form-control" placeholder="e.g. Richard Feynman" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="author-form-country">Country / Affiliation</label>
+            <input type="text" id="author-form-country" class="form-control" placeholder="e.g. United States" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="author-form-bio">Biographical Abstract</label>
+            <textarea id="author-form-bio" class="form-control" placeholder="Scholarly background and academic career..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="author-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Author</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/authors.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | Athenaeum Library</title>
+  <meta name="description" content="View and update current staff or patron account profile information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Account</div>
+          <ul class="nav-list">
+            <li class="nav-item active"><a href="/profile.html"><i data-lucide="user" style="width: 18px; height: 18px;"></i><span>My Profile</span></a></li>
+            <li class="nav-item admin-only"><a href="/settings.html"><i data-lucide="settings" style="width: 18px; height: 18px;"></i><span>Settings</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">User Profile</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="profile-page-container" style="max-width: 960px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Personal Account Profile</h1>
+            <p class="page-subtitle">Manage session identity, simulated password credentials, and active checkout history.</p>
+          </div>
+        </div>
+
+        <!-- Profile Top Banner -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-body" style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" id="profile-avatar-display" style="width: 84px; height: 84px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-sm);" />
+            <div style="flex: 1;">
+              <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main);" id="profile-display-name">Eleanor Vance</h2>
+              <div style="font-size: 0.875rem; color: var(--accent-600); font-weight: 600;" id="profile-display-role">Administrator</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Athenaeum Central Library System · Authorized User Session</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid-2">
+          <!-- Edit Profile Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Profile Information</h3>
+            </div>
+            <form id="profile-details-form">
+              <div class="card-body">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="profile-name-input">Display Full Name <span class="required">*</span></label>
+                  <input type="text" id="profile-name-input" class="form-control" required />
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="profile-email-input">Email Address <span class="required">*</span></label>
+                  <input type="email" id="profile-email-input" class="form-control" required />
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="profile-role-input">Assigned Role</label>
+                  <input type="text" id="profile-role-input" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-avatar-select">Avatar Illustration</label>
+                  <select id="profile-avatar-select" class="form-control">
+                    <option value="/assets/images/avatars/avatar-1.svg">Eleanor Vance (Administrator/Blazer)</option>
+                    <option value="/assets/images/avatars/avatar-2.svg">Marcus Chen (Librarian/Cardigan)</option>
+                    <option value="/assets/images/avatars/avatar-3.svg">Sarah Jenkins (Student/Purple)</option>
+                    <option value="/assets/images/avatars/avatar-4.svg">David Ross (Scholar/Brown)</option>
+                    <option value="/assets/images/avatars/avatar-5.svg">Priya Patel (Researcher/Cyan)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Change Simulated Password -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Security &amp; Password</h3>
+            </div>
+            <form id="profile-password-form">
+              <div class="card-body">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="current-password-input">Current Password</label>
+                  <input type="password" id="current-password-input" class="form-control" placeholder="••••••••" />
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="new-password-input">New Password</label>
+                  <input type="password" id="new-password-input" class="form-control" placeholder="At least 6 characters" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="confirm-password-input">Confirm New Password</label>
+                  <input type="password" id="confirm-password-input" class="form-control" placeholder="Repeat new password" />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-secondary">Update Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Personal Loans Table -->
+        <div class="card" style="margin-top: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">My Circulation Loans</h3>
+              <p class="card-subtitle">Active and past books checked out under this account</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ref #</th>
+                  <th>Book Title</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="profile-loans-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

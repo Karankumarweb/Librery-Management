@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fines &amp; Penalties | Athenaeum Library</title>
+  <meta name="description" content="Manage circulation penalties, overdue calculations, and simulated fine settlements." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item active"><a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item admin-only"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Circulation</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Fines &amp; Penalties Ledger</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="fines-page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Overdue Fines &amp; Penalty Ledger</h1>
+            <p class="page-subtitle">Standard policy: $0.50 per day past scheduled due date. Simulated settlements only.</p>
+          </div>
+        </div>
+
+        <!-- Summary KPI Row -->
+        <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 1.5rem;">
+          <div class="metric-card">
+            <div class="metric-label">Outstanding Unpaid</div>
+            <div class="metric-value tabular-nums" style="color: var(--danger);" id="fines-unpaid-sum">$11.00</div>
+            <div class="metric-subtext">Pending patron settlements</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-label">Collected &amp; Paid</div>
+            <div class="metric-value tabular-nums" style="color: var(--success);" id="fines-paid-sum">$3.00</div>
+            <div class="metric-subtext">Settled simulated fines</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-label">Policy Fine Rate</div>
+            <div class="metric-value tabular-nums">$0.50</div>
+            <div class="metric-subtext">Daily overdue rate</div>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-group">
+            <div class="input-with-icon filter-search">
+              <span class="input-icon"><i data-lucide="search" style="width: 16px; height: 16px;"></i></span>
+              <input type="text" id="fine-search-input" class="form-control" placeholder="Search by Fine ID, Patron, or Title..." />
+            </div>
+
+            <select id="fine-status-filter" class="form-control" style="width: auto;">
+              <option value="all">All Fine Records</option>
+              <option value="Unpaid">Unpaid Only</option>
+              <option value="Paid">Paid / Settled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Fine Ref #</th>
+                  <th>Overdue Book Title</th>
+                  <th>Patron</th>
+                  <th>Days Overdue</th>
+                  <th class="text-right">Penalty Fee</th>
+                  <th>Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="fines-table-body">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Fine Receipt Modal -->
+  <div class="modal-overlay" id="fine-receipt-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Fine Payment Receipt</h3>
+        <button class="modal-close-btn" id="fine-receipt-close" aria-label="Close dialog"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <div class="modal-body" id="fine-receipt-content"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.print()"><i data-lucide="printer" style="width: 15px; height: 15px;"></i> Print</button>
+        <button class="btn btn-primary" onclick="document.getElementById('fine-receipt-modal').classList.remove('active')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/fines.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

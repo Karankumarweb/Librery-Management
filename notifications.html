@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications Center | Athenaeum Library</title>
+  <meta name="description" content="Circulation alerts, overdue book reminders, hold readiness notices, and stock updates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item"><a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a></li>
+            <li class="nav-item"><a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item admin-only"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+            <li class="nav-item active"><a href="/notifications.html"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span>Notifications</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Notification Center</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="notifications-page-container" style="max-width: 900px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Notification &amp; Alert Center</h1>
+            <p class="page-subtitle" id="notifs-count-indicator">System events, overdue reminders, and hold readiness updates.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="mark-all-read-btn">
+              <i data-lucide="check-check" style="width: 16px; height: 16px;"></i>
+              Mark All Read
+            </button>
+            <button class="btn btn-ghost" id="clear-all-notifs-btn" style="color: var(--danger);">
+              <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="segmented-tabs">
+            <button class="tab-btn notif-filter-btn active" data-filter="all">All Alerts</button>
+            <button class="tab-btn notif-filter-btn" data-filter="unread">Unread</button>
+            <button class="tab-btn notif-filter-btn" data-filter="read">Read</button>
+          </div>
+        </div>
+
+        <div id="notifications-list">
+          <!-- Loaded dynamically -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/notifications.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

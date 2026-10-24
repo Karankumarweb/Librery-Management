@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Member Profile &amp; History | Athenaeum Library</title>
+  <meta name="description" content="View patron account details, active borrowings, loan history, and fine status." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/members.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+            <li class="nav-item"><a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a></li>
+            <li class="nav-item"><a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a></li>
+            <li class="nav-item active"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <div class="breadcrumb-trail">
+            <a href="/members.html">Members</a>
+            <span class="separator">/</span>
+            <span class="current-crumb" id="breadcrumb-member-name">Member Details</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/members.html" class="btn btn-secondary btn-sm">
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            Back to Directory
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container">
+        <!-- Header Member Card -->
+        <div id="member-profile-header"></div>
+
+        <!-- Borrowing Limit Bar -->
+        <div id="member-limit-card"></div>
+
+        <!-- Active Borrowings Table -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Currently Borrowed Volumes</h3>
+              <p class="card-subtitle">Active unreturned loans requiring due-date monitoring</p>
+            </div>
+            <a href="/issue-book.html" class="btn btn-primary btn-sm" id="issue-to-member-btn">
+              Issue Book to Member
+            </a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ref #</th>
+                  <th>Book Title</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Overdue Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="member-active-loans-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Lifetime Borrowing History Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Completed Circulation History</h3>
+              <p class="card-subtitle">Returned volumes and past loan transactions</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ref #</th>
+                  <th>Book Title</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="member-past-loans-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const memberId = params.get('id') || 'MEM-1003';
+
+      const members = window.StorageManager.getMembers();
+      const member = members.find(m => m.id === memberId);
+
+      if (!member) {
+        document.getElementById('member-profile-header').innerHTML = `
+          <div class="empty-state">
+            <h2 class="empty-title">Member Account Not Found</h2>
+            <p class="empty-desc">The member identifier ${window.Utils.escapeHTML(memberId)} does not exist in library records.</p>
+            <a href="/members.html" class="btn btn-primary">Return to Directory</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById('breadcrumb-member-name').textContent = member.fullName;
+
+      // Render Profile Card
+      const loans = window.StorageManager.getLoans().filter(l => l.memberId === member.id);
+      const activeLoans = loans.filter(l => !l.returnDate);
+      const pastLoans = loans.filter(l => l.returnDate);
+      const maxLimit = member.maxLimit || (member.membershipType === 'Faculty' ? 10 : 5);
+      const percent = Math.min(100, Math.round((activeLoans.length / maxLimit) * 100));
+
+      let statusBadge = 'badge-success';
+      if (member.status === 'Suspended') statusBadge = 'badge-danger';
+      if (member.status === 'Expired') statusBadge = 'badge-warning';
+
+      document.getElementById('member-profile-header').innerHTML = `
+        <div class="member-header-card">
+          <img src="${member.profileImage}" alt="${window.Utils.escapeHTML(member.fullName)}" class="member-avatar-lg" />
+          <div class="member-header-info">
+            <div class="member-name-lg">
+              ${window.Utils.escapeHTML(member.fullName)}
+              <span class="badge ${statusBadge}">${member.status}</span>
+            </div>
+            <div class="member-id-tag">Card ID: ${member.id} · Category: ${member.membershipType}</div>
+            <div class="member-header-meta">
+              <div><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> ${window.Utils.escapeHTML(member.email)}</div>
+              <div><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> ${window.Utils.escapeHTML(member.phone)}</div>
+              <div><i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> ${window.Utils.escapeHTML(member.address)}</div>
+              <div>Registered: ${window.Utils.formatDate(member.registrationDate)} · Expires: ${window.Utils.formatDate(member.expiryDate)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render Borrowing Limit Progress Bar
+      document.getElementById('member-limit-card').innerHTML = `
+        <div class="borrow-limit-box">
+          <div class="limit-bar-header">
+            <span>Circulation Quota Utilization: <strong class="tabular-nums">${activeLoans.length}</strong> of ${maxLimit} volumes in possession</span>
+            <span class="tabular-nums">${percent}%</span>
+          </div>
+          <div class="limit-progress-track">
+            <div class="limit-progress-fill ${percent >= 100 ? 'limit-danger' : percent >= 80 ? 'limit-warning' : ''}" style="width: ${percent}%;"></div>
+          </div>
+        </div>
+      `;
+
+      // Active Loans
+      const activeBody = document.getElementById('member-active-loans-body');
+      if (activeLoans.length === 0) {
+        activeBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">No active book loans for this member currently.</td></tr>`;
+      } else {
+        const todayStr = window.Utils.getTodayString();
+        activeBody.innerHTML = activeLoans.map(l => {
+          const overdue = window.Utils.calculateOverdueDays(l.dueDate, todayStr);
+          return `
+            <tr>
+              <td class="font-mono tabular-nums"><strong>${l.id}</strong></td>
+              <td><strong>${window.Utils.escapeHTML(l.bookTitle)}</strong><div style="font-size: 0.75rem; color: var(--text-muted);">${l.isbn}</div></td>
+              <td class="tabular-nums">${window.Utils.formatDate(l.issueDate)}</td>
+              <td class="tabular-nums" style="color: ${overdue > 0 ? 'var(--danger)' : 'var(--text-main)'}; font-weight: 600;">
+                ${window.Utils.formatDate(l.dueDate)}
+              </td>
+              <td>
+                <span class="badge ${overdue > 0 ? 'badge-danger' : 'badge-info'}">
+                  ${overdue > 0 ? `${overdue} Days Late` : 'On Schedule'}
+                </span>
+              </td>
+              <td class="text-right">
+                <a href="/return-book.html?tx=${l.id}" class="btn btn-secondary btn-sm">Process Return</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Past Loans
+      const pastBody = document.getElementById('member-past-loans-body');
+      if (pastLoans.length === 0) {
+        pastBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">No past borrowing history recorded yet.</td></tr>`;
+      } else {
+        pastBody.innerHTML = pastLoans.map(l => `
+          <tr>
+            <td class="font-mono tabular-nums"><strong>${l.id}</strong></td>
+            <td><strong>${window.Utils.escapeHTML(l.bookTitle)}</strong></td>
+            <td class="tabular-nums">${window.Utils.formatDate(l.issueDate)}</td>
+            <td class="tabular-nums">${window.Utils.formatDate(l.dueDate)}</td>
+            <td class="tabular-nums">${window.Utils.formatDate(l.returnDate)}</td>
+            <td><span class="badge badge-success">Returned</span></td>
+          </tr>
+        `).join('');
+      }
+
+      const issueBtn = document.getElementById('issue-to-member-btn');
+      if (issueBtn) {
+        issueBtn.href = `/issue-book.html?memberId=${member.id}`;
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

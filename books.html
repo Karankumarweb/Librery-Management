@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books Catalog | Athenaeum Library Management System</title>
+  <meta name="description" content="Manage books catalog, filter by discipline, track shelf locations, and edit copies inventory." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/books.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar">
+          <i data-lucide="sidebar" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-section-title">Collection &amp; Catalog</div>
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/categories.html"><i data-lucide="layers" style="width: 18px; height: 18px;"></i><span>Categories</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/authors.html"><i data-lucide="users" style="width: 18px; height: 18px;"></i><span>Authors</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/issue-book.html"><i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i><span>Issue Book</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/return-book.html"><i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i><span>Return Book</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/reservations.html"><i data-lucide="bookmark" style="width: 18px; height: 18px;"></i><span>Reservations</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/fines.html"><i data-lucide="receipt" style="width: 18px; height: 18px;"></i><span>Fines &amp; Penalties</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/suppliers.html"><i data-lucide="truck" style="width: 18px; height: 18px;"></i><span>Suppliers</span></a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/notifications.html"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span>Notifications</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-section-title">Account</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/profile.html"><i data-lucide="user" style="width: 18px; height: 18px;"></i><span>My Profile</span></a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/settings.html"><i data-lucide="settings" style="width: 18px; height: 18px;"></i><span>Settings</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="User avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <div class="demo-banner">
+        <div><strong>Notice:</strong> Complete frontend library system running with persistent browser data.</div>
+        <a href="/">Public Library</a>
+      </div>
+
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">Books Catalog</span>
+          </div>
+        </div>
+
+        <div class="top-nav-center">
+          <div class="global-search-bar">
+            <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="global-search-input" placeholder="Search catalog by title, ISBN, or author..." />
+            <span class="search-shortcut">⌘K</span>
+          </div>
+        </div>
+
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/notifications.html" class="icon-btn"><i data-lucide="bell" style="width: 18px; height: 18px;"></i><span class="icon-badge-dot" id="notification-dot" style="display: none;"></span></a>
+          <div class="dropdown-wrapper">
+            <button class="profile-menu-trigger" id="profile-menu-trigger">
+              <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+              <span class="profile-name-top hidden md:inline">Eleanor Vance</span>
+              <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+            </button>
+            <div class="dropdown-menu" id="profile-dropdown">
+              <a href="/profile.html" class="dropdown-item"><i data-lucide="user" style="width: 15px; height: 15px;"></i><span>Profile</span></a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" id="logout-btn" style="color: var(--danger); width: 100%;"><i data-lucide="log-out" style="width: 15px; height: 15px;"></i><span>Sign Out</span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-container" id="books-page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Catalog Holdings &amp; Volumes</h1>
+            <p class="page-subtitle" id="books-result-count">Manage book copies, shelf allocations, and inventory statuses.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="open-add-book-modal-btn">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+              Catalog New Book
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Control Toolbar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <div class="input-with-icon filter-search">
+              <span class="input-icon"><i data-lucide="search" style="width: 16px; height: 16px;"></i></span>
+              <input type="text" id="book-search-input" class="form-control" placeholder="Search by title, author, ISBN..." />
+            </div>
+
+            <select id="book-category-filter" class="form-control" style="width: auto;">
+              <option value="all">All Disciplines</option>
+            </select>
+
+            <select id="book-availability-filter" class="form-control" style="width: auto;">
+              <option value="all">All Inventory</option>
+              <option value="available">Available on Shelf</option>
+              <option value="unavailable">Out of Stock</option>
+            </select>
+
+            <select id="book-sort-select" class="form-control" style="width: auto;">
+              <option value="title-asc">Sort: Title (A-Z)</option>
+              <option value="title-desc">Sort: Title (Z-A)</option>
+              <option value="year-desc">Sort: Newest First</option>
+              <option value="year-asc">Sort: Oldest First</option>
+              <option value="copies-desc">Sort: Most Copies</option>
+            </select>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <!-- View Mode Switcher -->
+            <div class="segmented-tabs">
+              <button class="tab-btn active" id="view-grid-btn" title="Grid View" aria-label="Grid view">
+                <i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i>
+              </button>
+              <button class="tab-btn" id="view-table-btn" title="Table View" aria-label="Table view">
+                <i data-lucide="table" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Views Container -->
+        <div id="books-grid-view" class="books-grid"></div>
+        <div id="books-table-view" style="display: none;"></div>
+
+        <!-- Pagination Toolbar -->
+        <div class="pagination-toolbar" id="books-pagination" style="display: none;"></div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add / Edit Book Modal Dialog -->
+  <div class="modal-overlay" id="book-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="book-modal-title">Catalog New Book</h3>
+        <button class="modal-close-btn" id="book-modal-close" aria-label="Close dialog">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="book-form">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label class="form-label" for="book-form-title">
+                Book Title <span class="required">*</span>
+              </label>
+              <input type="text" id="book-form-title" class="form-control" placeholder="e.g. Introduction to Algorithms" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-isbn">
+                ISBN Number <span class="required">*</span>
+              </label>
+              <input type="text" id="book-form-isbn" class="form-control" placeholder="e.g. 978-0262046305" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-author">
+                Author Name <span class="required">*</span>
+              </label>
+              <input type="text" id="book-form-author" class="form-control" placeholder="e.g. Thomas H. Cormen" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-category">
+                Department / Category <span class="required">*</span>
+              </label>
+              <select id="book-form-category" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-publisher">
+                Publisher
+              </label>
+              <input type="text" id="book-form-publisher" class="form-control" placeholder="e.g. MIT Press" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-year">
+                Publication Year
+              </label>
+              <input type="number" id="book-form-year" class="form-control" placeholder="2022" min="1500" max="2030" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-shelf">
+                Shelf Location Code <span class="required">*</span>
+              </label>
+              <input type="text" id="book-form-shelf" class="form-control" placeholder="e.g. A-12-04" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-total">
+                Total Copies in Stock <span class="required">*</span>
+              </label>
+              <input type="number" id="book-form-total" class="form-control" min="1" value="5" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-available">
+                Available Copies on Shelf <span class="required">*</span>
+              </label>
+              <input type="number" id="book-form-available" class="form-control" min="0" value="5" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-price">
+                Catalog Price ($)
+              </label>
+              <input type="number" id="book-form-price" class="form-control" step="0.01" value="49.99" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-form-cover">
+                Cover Art Style
+              </label>
+              <select id="book-form-cover" class="form-control">
+                <option value="/assets/images/book-covers/cover-1.svg">Computer Science &amp; Tech (Navy/Teal)</option>
+                <option value="/assets/images/book-covers/cover-2.svg">Classic Literature (Gold &amp; Midnight)</option>
+                <option value="/assets/images/book-covers/cover-3.svg">Physical Sciences (Emerald Orbit)</option>
+                <option value="/assets/images/book-covers/cover-4.svg">Economics &amp; Finance (Indigo Trend)</option>
+                <option value="/assets/images/book-covers/cover-5.svg">World History (Crimson Pillars)</option>
+                <option value="/assets/images/book-covers/cover-6.svg">Medical Sciences (Teal Helix)</option>
+                <option value="/assets/images/book-covers/cover-7.svg">Artificial Intelligence (Neural Dark)</option>
+                <option value="/assets/images/book-covers/cover-8.svg">Philosophy &amp; Ethics (Temple Classic)</option>
+                <option value="/assets/images/book-covers/cover-9.svg">Law &amp; Jurisprudence (Scales of Justice)</option>
+                <option value="/assets/images/book-covers/cover-10.svg">Behavioral Sciences (Magenta Mind)</option>
+              </select>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label class="form-label" for="book-form-desc">
+                Synopsis &amp; Abstract
+              </label>
+              <textarea id="book-form-desc" class="form-control" placeholder="Academic description of the book text..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="book-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Book Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/books.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

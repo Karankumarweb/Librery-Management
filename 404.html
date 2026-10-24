@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | Athenaeum Library</title>
+  <meta name="description" content="The requested library catalog page or circulation record could not be found." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: var(--bg-canvas); padding: 2rem;">
+  <div style="max-width: 520px; width: 100%; text-align: center;">
+    <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--accent-50); color: var(--accent-500); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;">
+      <i data-lucide="book-x" style="width: 36px; height: 36px;"></i>
+    </div>
+    <div style="font-size: 0.875rem; font-weight: 700; text-transform: uppercase; color: var(--accent-500); letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+      Error 404 · Shelf Void
+    </div>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.02em; margin-bottom: 1rem;">
+      Page Not Found in Stacks
+    </h1>
+    <p style="font-size: 0.9375rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">
+      The catalog page or circulation resource you requested is missing, displaced, or has been archived to rare preservation vaults.
+    </p>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="/dashboard.html" class="btn btn-primary btn-lg">
+        <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i>
+        Staff Dashboard
+      </a>
+      <a href="/books.html" class="btn btn-secondary btn-lg">
+        <i data-lucide="book" style="width: 18px; height: 18px;"></i>
+        Browse Catalog
+      </a>
+      <a href="/" class="btn btn-ghost">
+        Public Library
+      </a>
+    </div>
+  </div>
+
+  <script src="./js/storage.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athenaeum University Library | Premier Academic Repository</title>
+  <meta name="description" content="Welcome to Athenaeum University Central Library. Explore academic volumes, classic literature, research journals, and modern digital catalog services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/books.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Public Landing Specific Styling */
+    .public-header {
+      height: 72px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .public-nav-container {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .landing-hero {
+      position: relative;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 5rem 2rem 6rem 2rem;
+      overflow: hidden;
+    }
+    .landing-hero-backdrop {
+      position: absolute;
+      inset: 0;
+      opacity: 0.28;
+      background-image: url('./assets/images/library-hero.svg');
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+    }
+    .landing-hero-inner {
+      position: relative;
+      z-index: 10;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 1rem;
+    }
+    .hero-headline {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+    .hero-subhead {
+      font-size: 1.125rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto 2.5rem auto;
+    }
+    .hero-search-box {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+    .hero-search-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.625rem 1rem;
+      font-size: 0.9375rem;
+      color: var(--text-main);
+    }
+    .hero-search-box input:focus {
+      outline: none;
+    }
+    .section-wrap {
+      padding: 5rem 2rem;
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+    }
+    .section-header-center {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem auto;
+    }
+    .category-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .category-showcase-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .category-showcase-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-400);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+    .hours-info-strip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .public-footer {
+      background: #0f172a;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4rem 2rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-bottom {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    @media (max-width: 992px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .hours-info-strip { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Simulated Demo Notice -->
+  <div class="demo-banner">
+    <div>
+      <strong>Notice:</strong> Complete frontend library management system operating with interactive localStorage demo data.
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="/login.html">Sign In to Staff Console</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="public-header">
+    <div class="public-nav-container">
+      <a href="/" style="display: flex; align-items: center; gap: 0.75rem;">
+        <img src="./assets/images/logo.svg" alt="Athenaeum Library Logo" style="height: 38px; width: auto;" />
+      </a>
+
+      <nav style="display: flex; align-items: center; gap: 2rem; font-size: 0.875rem; font-weight: 600;" class="hidden md:flex">
+        <a href="#catalog" style="color: var(--text-muted); hover: var(--text-main);">Catalog</a>
+        <a href="#categories" style="color: var(--text-muted);">Departments</a>
+        <a href="#features" style="color: var(--text-muted);">Services</a>
+        <a href="#hours" style="color: var(--text-muted);">Hours &amp; Location</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button class="icon-btn theme-toggle-btn" title="Toggle theme" aria-label="Toggle dark mode">
+          <i data-lucide="moon" style="width: 18px; height: 18px;"></i>
+        </button>
+        <a href="/login.html" class="btn btn-secondary btn-sm">Staff Login</a>
+        <a href="/register.html" class="btn btn-primary btn-sm">Get Library Card</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="landing-hero">
+    <div class="landing-hero-backdrop"></div>
+    <div class="landing-hero-inner">
+      <div class="hero-kicker">
+        <i data-lucide="compass" style="width: 16px; height: 16px;"></i>
+        Cambridge Academic Repository · Est. 1894
+      </div>
+      <h1 class="hero-headline">
+        Knowledge, Research &amp; Scholarly Distinction.
+      </h1>
+      <p class="hero-subhead">
+        Browse over 300,000 academic titles, rare manuscripts, scientific periodicals, and university archives. Discover literature, reserve books, and manage circulation seamlessly.
+      </p>
+
+      <!-- Public Catalog Search -->
+      <form class="hero-search-box" action="/books.html" method="GET">
+        <i data-lucide="search" style="color: var(--text-subtle); margin-left: 0.5rem; width: 20px; height: 20px;"></i>
+        <input type="text" name="search" placeholder="Search by title, author, keyword, or ISBN..." required />
+        <button type="submit" class="btn btn-primary">
+          Explore Catalog
+        </button>
+      </form>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 2.5rem; font-size: 0.8125rem; color: #94a3b8;">
+        <div><strong style="color: #ffffff;" class="tabular-nums">32,000+</strong> Active Patrons</div>
+        <span style="opacity: 0.3;">|</span>
+        <div><strong style="color: #ffffff;" class="tabular-nums">140,000+</strong> Print Volumes</div>
+        <span style="opacity: 0.3;">|</span>
+        <div><strong style="color: #ffffff;">Open Daily</strong> 07:00 – 23:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Books Showcase -->
+  <section id="catalog" class="section-wrap">
+    <div class="section-header-center">
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;">
+        Curated Selection
+      </div>
+      <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.02em;">
+        Featured Academic Books
+      </h2>
+      <p style="font-size: 0.9375rem; color: var(--text-muted); margin-top: 0.5rem;">
+        Core course readings, seminal research texts, and literary treasures available in our reading rooms.
+      </p>
+    </div>
+
+    <div class="books-grid" id="public-featured-books">
+      <!-- Populated dynamically from storage -->
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/books.html" class="btn btn-secondary btn-lg">
+        View Entire Catalog (32+ Titles)
+        <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Categories Showcase -->
+  <section id="categories" style="background-color: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 5rem 2rem;">
+    <div style="max-width: var(--max-content-width); margin: 0 auto;">
+      <div class="section-header-center">
+        <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;">
+          Departments
+        </div>
+        <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.02em;">
+          Browse Collection by Discipline
+        </h2>
+        <p style="font-size: 0.9375rem; color: var(--text-muted); margin-top: 0.5rem;">
+          Explore dedicated stacks across faculties, specialized archives, and digital monograph collections.
+        </p>
+      </div>
+
+      <div class="category-showcase-grid" id="public-categories-grid">
+        <!-- Populated dynamically from storage -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Library Services & Features -->
+  <section id="features" class="section-wrap">
+    <div class="section-header-center">
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;">
+        Library Facilities
+      </div>
+      <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.02em;">
+        Modern Services for Researchers &amp; Students
+      </h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--accent-50); color: var(--accent-500); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+          <i data-lucide="book-open" style="width: 22px; height: 22px;"></i>
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">Circulation &amp; Loans</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Borrow up to 10 volumes for faculty and 5 for students with automated due-date notifications and renewal privileges.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--success-bg); color: var(--success); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+          <i data-lucide="bookmark" style="width: 22px; height: 22px;"></i>
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">Hold Queue &amp; Reserves</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Reserve titles currently in circulation. Automated notifications alert you the instant returned copies reach the circulation desk.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--warning-bg); color: var(--warning); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+          <i data-lucide="file-text" style="width: 22px; height: 22px;"></i>
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">Interlibrary Loans</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Access consortium network resources with partner universities worldwide for specialized monographs and dissertations.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--info-bg); color: var(--info); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+          <i data-lucide="shield-check" style="width: 22px; height: 22px;"></i>
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">Quiet Study &amp; Carrels</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Soundproof research carrels, group discussion suites, and high-speed Wi-Fi across all six reading floors.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Location -->
+  <section id="hours" style="background-color: var(--bg-subtle); padding: 5rem 2rem;">
+    <div style="max-width: var(--max-content-width); margin: 0 auto;">
+      <div class="hours-info-strip">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <i data-lucide="clock" style="color: var(--accent-500); width: 22px; height: 22px;"></i>
+            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main);">Hours of Operation</h3>
+          </div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.375rem;">
+            <div><strong>Monday – Friday:</strong> 07:00 – 23:00</div>
+            <div><strong>Saturday:</strong> 09:00 – 20:00</div>
+            <div><strong>Sunday:</strong> 11:00 – 21:00</div>
+            <div style="color: var(--info); font-size: 0.75rem; margin-top: 0.25rem;">*24-hour reading rooms open during exam term</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <i data-lucide="map-pin" style="color: var(--accent-500); width: 22px; height: 22px;"></i>
+            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main);">Physical Address</h3>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+            Athenaeum Central Library Building<br />
+            450 University Avenue<br />
+            Cambridge, MA 02138<br />
+            Phone: +1 (555) 349-8200
+          </p>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <i data-lucide="user-check" style="color: var(--accent-500); width: 22px; height: 22px;"></i>
+            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--text-main);">Membership Inquiries</h3>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+            Open to enrolled students, academic faculty, registered researchers, and community library pass holders.
+          </p>
+          <a href="/register.html" class="btn btn-primary btn-sm">Register for Library Card</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="public-footer">
+    <div class="footer-inner">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: #2563eb; display: flex; align-items: center; justify-content: center; color: white;">
+            <i data-lucide="book-marked" style="width: 18px; height: 18px;"></i>
+          </div>
+          <span style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em;">ATHENAEUM</span>
+        </div>
+        <p style="font-size: 0.875rem; line-height: 1.6; max-width: 320px;">
+          Dedicated to academic research excellence, preservation of intellectual heritage, and modern patron circulation.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="font-size: 0.875rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Catalog</h4>
+        <ul style="font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.625rem;">
+          <li><a href="/books.html" style="color: #94a3b8; hover: color: #ffffff;">All Books</a></li>
+          <li><a href="/categories.html" style="color: #94a3b8;">Departments</a></li>
+          <li><a href="/authors.html" style="color: #94a3b8;">Author Directory</a></li>
+          <li><a href="/reservations.html" style="color: #94a3b8;">Hold Queue</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-size: 0.875rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Administration</h4>
+        <ul style="font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.625rem;">
+          <li><a href="/login.html" style="color: #94a3b8;">Staff Login</a></li>
+          <li><a href="/dashboard.html" style="color: #94a3b8;">Admin Dashboard</a></li>
+          <li><a href="/reports.html" style="color: #94a3b8;">Circulation Reports</a></li>
+          <li><a href="/settings.html" style="color: #94a3b8;">System Settings</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-size: 0.875rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Quick Demo Access</h4>
+        <div style="font-size: 0.8125rem; line-height: 1.5; background: rgba(255, 255, 255, 0.04); padding: 0.875rem; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.08);">
+          <div><strong>Demo Admin:</strong> admin@athenaeum.edu</div>
+          <div><strong>Demo Password:</strong> admin123</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="/dashboard.html" style="color: #60a5fa; font-weight: 600; text-decoration: underline;">Launch Management Dashboard &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Athenaeum University Library Management System. Frontend Architectural Prototype.</div>
+      <div>Simulated localStorage data storage · No backend API required</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      // Render 4 featured books from storage
+      const booksContainer = document.getElementById('public-featured-books');
+      if (booksContainer && window.StorageManager) {
+        const books = window.StorageManager.getBooks().slice(0, 4);
+        booksContainer.innerHTML = books.map(book => `
+          <div class="book-card">
+            <div class="book-card-cover-wrap">
+              <img src="${book.coverImage}" alt="${window.Utils.escapeHTML(book.title)}" class="book-card-cover" loading="lazy" />
+              <div class="book-card-badge">
+                <span class="badge ${book.availableCopies > 0 ? 'badge-success' : 'badge-danger'}">
+                  ${book.availableCopies > 0 ? `${book.availableCopies} Available` : 'Reserved'}
+                </span>
+              </div>
+            </div>
+            <div class="book-card-body">
+              <div class="book-card-category">${window.Utils.escapeHTML(book.category)}</div>
+              <a href="/book-details.html?id=${book.id}" class="book-card-title">${window.Utils.escapeHTML(book.title)}</a>
+              <div class="book-card-author">${window.Utils.escapeHTML(book.author)}</div>
+              <div class="book-card-footer">
+                <span class="shelf-tag">Shelf ${window.Utils.escapeHTML(book.shelfNumber)}</span>
+                <a href="/book-details.html?id=${book.id}" class="btn btn-secondary btn-sm">Details</a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render category showcase
+      const catContainer = document.getElementById('public-categories-grid');
+      if (catContainer && window.StorageManager) {
+        const categories = window.StorageManager.getCategories().slice(0, 8);
+        const books = window.StorageManager.getBooks();
+
+        catContainer.innerHTML = categories.map(cat => {
+          const count = books.filter(b => b.category === cat.name || b.categoryId === cat.id).length;
+          return `
+            <a href="/books.html?category=${encodeURIComponent(cat.name)}" class="category-showcase-card">
+              <div style="font-size: 1.125rem; font-weight: 700; color: var(--text-main);">${window.Utils.escapeHTML(cat.name)}</div>
+              <p style="font-size: 0.8125rem; color: var(--text-muted); line-height: 1.4; flex: 1;">
+                ${window.Utils.escapeHTML(cat.description)}
+              </p>
+              <div style="font-size: 0.75rem; font-weight: 600; color: var(--accent-500); display: flex; align-items: center; justify-content: space-between;">
+                <span>${count} Titles Cataloged</span>
+                <span>&rarr;</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>

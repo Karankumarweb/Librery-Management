@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Settings | Athenaeum Library</title>
+  <meta name="description" content="Configure circulation policy rules, loan durations, daily fine penalties, and library metadata." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon"><i data-lucide="book-marked" style="width: 18px; height: 18px;"></i></div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar"><i data-lucide="sidebar" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/dashboard.html"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a href="/books.html"><i data-lucide="book" style="width: 18px; height: 18px;"></i><span>Books Catalog</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/members.html"><i data-lucide="user-check" style="width: 18px; height: 18px;"></i><span>Members</span></a></li>
+            <li class="nav-item"><a href="/suppliers.html"><i data-lucide="truck" style="width: 18px; height: 18px;"></i><span>Suppliers</span></a></li>
+            <li class="nav-item"><a href="/reports.html"><i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i><span>Reports &amp; Analytics</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="nav-section-title">Account</div>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="/profile.html"><i data-lucide="user" style="width: 18px; height: 18px;"></i><span>My Profile</span></a></li>
+            <li class="nav-item active"><a href="/settings.html"><i data-lucide="settings" style="width: 18px; height: 18px;"></i><span>Settings</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <div class="app-main">
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu" style="width: 20px; height: 20px;"></i></button>
+          <div class="breadcrumb-trail">
+            <a href="/dashboard.html">Athenaeum</a>
+            <span class="separator">/</span>
+            <span class="current-crumb">System Configuration</span>
+          </div>
+        </div>
+        <div class="top-nav-right">
+          <button class="icon-btn theme-toggle-btn" title="Toggle theme"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></button>
+          <a href="/profile.html" class="profile-menu-trigger">
+            <img src="./assets/images/avatars/avatar-1.svg" alt="Avatar" class="profile-avatar-top" />
+          </a>
+        </div>
+      </header>
+
+      <main class="page-container" id="settings-page-container" style="max-width: 960px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Institutional Library Settings</h1>
+            <p class="page-subtitle">Configure circulation duration, overdue fine calculation rates, and library metadata.</p>
+          </div>
+        </div>
+
+        <!-- Circulation Rules Form -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Circulation &amp; Lending Policies</h3>
+              <p class="card-subtitle">Rules applied dynamically across checkouts and returns</p>
+            </div>
+          </div>
+          <form id="circulation-rules-form">
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="setting-loan-days">Standard Loan Duration (Days) <span class="required">*</span></label>
+                  <input type="number" id="setting-loan-days" class="form-control" min="1" max="90" required />
+                  <span class="form-helper">Applied automatically to newly issued books.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="setting-max-books">Default Max Books Allowed Per Patron <span class="required">*</span></label>
+                  <input type="number" id="setting-max-books" class="form-control" min="1" max="25" required />
+                  <span class="form-helper">Faculty accounts can be assigned 10.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="setting-fine-rate">Daily Overdue Fine Rate ($/Day) <span class="required">*</span></label>
+                  <input type="number" id="setting-fine-rate" class="form-control" step="0.05" min="0" required />
+                  <span class="form-helper">Multiplied by days overdue during return audit.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Currency Symbol</label>
+                  <input type="text" class="form-control" value="USD ($)" disabled />
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Save Circulation Rules</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Institution Details Form -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Library Institution Information</h3>
+              <p class="card-subtitle">Appears on circulation receipts and public pages</p>
+            </div>
+          </div>
+          <form id="library-info-form">
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group col-span-2">
+                  <label class="form-label" for="setting-library-name">Library Name <span class="required">*</span></label>
+                  <input type="text" id="setting-library-name" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="setting-library-email">Circulation Email <span class="required">*</span></label>
+                  <input type="email" id="setting-library-email" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="setting-library-phone">Circulation Desk Phone</label>
+                  <input type="tel" id="setting-library-phone" class="form-control" />
+                </div>
+
+                <div class="form-group col-span-2">
+                  <label class="form-label" for="setting-library-address">Campus Address</label>
+                  <input type="text" id="setting-library-address" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Save Institution Details</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Danger Zone: Reset Demo Data -->
+        <div class="card" style="border-color: var(--danger-border);">
+          <div class="card-header" style="background-color: var(--danger-bg); border-bottom-color: var(--danger-border);">
+            <div>
+              <h3 class="card-title" style="color: var(--danger);">Demo Data Management</h3>
+              <p class="card-subtitle" style="color: var(--danger);">Restore initial library state</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <p style="font-size: 0.875rem; color: var(--text-main); line-height: 1.5; margin-bottom: 1rem;">
+              Resetting will clear all changes made during this demo session and restore the 32+ original academic books, 16 members, 10 authors, 9 categories, 5 suppliers, and initial circulation transactions.
+            </p>
+            <button type="button" class="btn btn-danger" id="settings-reset-data-btn">
+              <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
+              Reset All Demo Data to Factory Seed
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/settings.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Athenaeum - Library Management System",
+  "description": "A comprehensive, enterprise-grade Library Management System frontend featuring catalog management, circulation (issues & returns), reservations, members, fines, analytics reports, and role-based access.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

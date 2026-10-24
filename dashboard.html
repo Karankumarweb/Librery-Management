@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Athenaeum Library Management System</title>
+  <meta name="description" content="Circulation metrics, inventory KPIs, and operational overview for Athenaeum Library." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/forms.css" />
+  <link rel="stylesheet" href="./css/tables.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="stylesheet" href="./css/themes.css" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-brand">
+          <div class="brand-icon">
+            <i data-lucide="book-marked" style="width: 18px; height: 18px;"></i>
+          </div>
+          <span>ATHENAEUM</span>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Collapse sidebar" aria-label="Collapse sidebar">
+          <i data-lucide="sidebar" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- Main Section -->
+        <div>
+          <div class="nav-section-title">Core Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="/dashboard.html">
+                <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Catalog Section -->
+        <div>
+          <div class="nav-section-title">Collection &amp; Catalog</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/books.html">
+                <i data-lucide="book" style="width: 18px; height: 18px;"></i>
+                <span>Books Catalog</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/categories.html">
+                <i data-lucide="layers" style="width: 18px; height: 18px;"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/authors.html">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+                <span>Authors</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Circulation Section -->
+        <div>
+          <div class="nav-section-title">Circulation Desk</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/issue-book.html">
+                <i data-lucide="arrow-up-right" style="width: 18px; height: 18px;"></i>
+                <span>Issue Book</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/return-book.html">
+                <i data-lucide="arrow-down-left" style="width: 18px; height: 18px;"></i>
+                <span>Return Book</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/reservations.html">
+                <i data-lucide="bookmark" style="width: 18px; height: 18px;"></i>
+                <span>Reservations</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/fines.html">
+                <i data-lucide="receipt" style="width: 18px; height: 18px;"></i>
+                <span>Fines &amp; Penalties</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Administration Section -->
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/members.html">
+                <i data-lucide="user-check" style="width: 18px; height: 18px;"></i>
+                <span>Members</span>
+              </a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/suppliers.html">
+                <i data-lucide="truck" style="width: 18px; height: 18px;"></i>
+                <span>Suppliers</span>
+              </a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/reports.html">
+                <i data-lucide="bar-chart-3" style="width: 18px; height: 18px;"></i>
+                <span>Reports &amp; Analytics</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/notifications.html">
+                <i data-lucide="bell" style="width: 18px; height: 18px;"></i>
+                <span>Notifications</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- System Section -->
+        <div>
+          <div class="nav-section-title">Account</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/profile.html">
+                <i data-lucide="user" style="width: 18px; height: 18px;"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li class="nav-item admin-only">
+              <a href="/settings.html">
+                <i data-lucide="settings" style="width: 18px; height: 18px;"></i>
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Sidebar User Profile Footer -->
+      <div class="sidebar-footer">
+        <div class="user-badge-compact">
+          <img src="./assets/images/avatars/avatar-1.svg" alt="User avatar" class="user-avatar-mini" />
+          <div class="user-meta-compact">
+            <div class="user-name-compact">Eleanor Vance</div>
+            <div class="user-role-compact">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <!-- Main Content Shell -->
+    <div class="app-main">
+      <!-- Simulated Demo Banner -->
+      <div class="demo-banner">
+        <div>
+          <strong>Frontend Only System:</strong> Data is persisted in your browser's local storage.
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button id="reset-demo-data-btn" style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem;">
+            Reset Demo Data
+          </button>
+          <a href="/">Public Site</a>
+        </div>
+      </div>
+
+      <!-- Top Navigation Bar -->
+      <header class="top-navbar">
+        <div class="top-nav-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu">
+            <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+          </button>
+          <div class="breadcrumb-trail">
+            <span>Athenaeum</span>
+            <span class="separator">/</span>
+            <span class="current-crumb">Dashboard Overview</span>
+          </div>
+        </div>
+
+        <div class="top-nav-center">
+          <div class="global-search-bar">
+            <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="global-search-input" placeholder="Search catalog by title, ISBN, or author..." />
+            <span class="search-shortcut">⌘K</span>
+          </div>
+        </div>
+
+        <div class="top-nav-right">
+          <!-- Theme Toggle -->
+          <button class="icon-btn theme-toggle-btn" title="Toggle dark/light mode" aria-label="Toggle dark mode">
+            <i data-lucide="moon" style="width: 18px; height: 18px;"></i>
+          </button>
+
+          <!-- Notifications Bell -->
+          <a href="/notifications.html" class="icon-btn" title="View Notifications" aria-label="Notifications">
+            <i data-lucide="bell" style="width: 18px; height: 18px;"></i>
+            <span class="icon-badge-dot" id="notification-dot" style="display: none;"></span>
+          </a>
+
+          <!-- Profile Menu -->
+          <div class="dropdown-wrapper">
+            <button class="profile-menu-trigger" id="profile-menu-trigger" aria-label="User profile menu">
+              <img src="./assets/images/avatars/avatar-1.svg" alt="User Avatar" class="profile-avatar-top" />
+              <span class="profile-name-top hidden md:inline">Eleanor Vance</span>
+              <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+            </button>
+
+            <div class="dropdown-menu" id="profile-dropdown">
+              <div style="padding: 0.5rem 0.875rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 0.25rem;">
+                <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-main);" class="profile-name-top">Eleanor Vance</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);" class="user-role-compact">Administrator</div>
+              </div>
+              <a href="/profile.html" class="dropdown-item">
+                <i data-lucide="user" style="width: 15px; height: 15px;"></i>
+                <span>Profile &amp; Account</span>
+              </a>
+              <a href="/settings.html" class="dropdown-item admin-only">
+                <i data-lucide="settings" style="width: 15px; height: 15px;"></i>
+                <span>System Settings</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" id="logout-btn" style="color: var(--danger); width: 100%;">
+                <i data-lucide="log-out" style="width: 15px; height: 15px;"></i>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-container" id="dashboard-page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Circulation &amp; Catalog Dashboard</h1>
+            <p class="page-subtitle">Real-time status of university holdings, member activity, and circulation transactions.</p>
+          </div>
+          <div class="page-actions">
+            <a href="/issue-book.html" class="btn btn-primary">
+              <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
+              Issue Book
+            </a>
+            <a href="/return-book.html" class="btn btn-secondary">
+              <i data-lucide="arrow-down-left" style="width: 16px; height: 16px;"></i>
+              Process Return
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Actions Bar -->
+        <div class="quick-actions-bar">
+          <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-right: 0.25rem;">
+            Quick Actions:
+          </span>
+          <a href="/issue-book.html" class="quick-action-pill">
+            <i data-lucide="book-open" style="width: 14px; height: 14px; color: var(--accent-500);"></i>
+            Issue Book
+          </a>
+          <a href="/return-book.html" class="quick-action-pill">
+            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px; color: var(--success);"></i>
+            Return Book
+          </a>
+          <a href="/books.html" class="quick-action-pill">
+            <i data-lucide="plus-circle" style="width: 14px; height: 14px; color: var(--info);"></i>
+            Catalog New Book
+          </a>
+          <a href="/members.html" class="quick-action-pill">
+            <i data-lucide="user-plus" style="width: 14px; height: 14px; color: var(--warning);"></i>
+            Register Member
+          </a>
+          <a href="/reservations.html" class="quick-action-pill">
+            <i data-lucide="bookmark" style="width: 14px; height: 14px;"></i>
+            Hold Queue
+          </a>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="metrics-grid">
+          <!-- Total Books -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Total Titles</span>
+              <div class="metric-icon-wrap metric-icon-blue">
+                <i data-lucide="book" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" id="kpi-total-books">32</div>
+            <div class="metric-subtext" id="kpi-total-copies">Loading copies...</div>
+          </div>
+
+          <!-- Currently Issued -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Issued Books</span>
+              <div class="metric-icon-wrap metric-icon-green">
+                <i data-lucide="arrow-up-right" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" id="kpi-issued-books">5</div>
+            <div class="metric-subtext">Active patron loans</div>
+          </div>
+
+          <!-- Overdue Books -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Overdue Books</span>
+              <div class="metric-icon-wrap metric-icon-red">
+                <i data-lucide="alert-triangle" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" style="color: var(--danger);" id="kpi-overdue-books">2</div>
+            <div class="metric-subtext">Requires return reminder</div>
+          </div>
+
+          <!-- Outstanding Fines -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Unpaid Fines</span>
+              <div class="metric-icon-wrap metric-icon-amber">
+                <i data-lucide="receipt" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" style="color: var(--warning);" id="kpi-outstanding-fines">$11.00</div>
+            <div class="metric-subtext">Accrued overdue penalties</div>
+          </div>
+        </div>
+
+        <!-- Second Row Metrics -->
+        <div class="metrics-grid" style="margin-top: -0.75rem; margin-bottom: 1.75rem;">
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Active Members</span>
+              <div class="metric-icon-wrap metric-icon-blue">
+                <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" id="kpi-active-members">15</div>
+            <div class="metric-subtext">Faculty, students, &amp; fellows</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Hold Reservations</span>
+              <div class="metric-icon-wrap metric-icon-amber">
+                <i data-lucide="bookmark" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums" id="kpi-reservations">3</div>
+            <div class="metric-subtext">Pending patron requests</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Catalog Disciplines</span>
+              <div class="metric-icon-wrap metric-icon-green">
+                <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums">9</div>
+            <div class="metric-subtext">Academic departments</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Registered Suppliers</span>
+              <div class="metric-icon-wrap metric-icon-blue">
+                <i data-lucide="truck" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <div class="metric-value tabular-nums">5</div>
+            <div class="metric-subtext">Institutional publishers</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="dashboard-grid-2">
+          <!-- Monthly Circulation Trend Chart -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Monthly Circulation Trends</h3>
+                <p class="card-subtitle">Comparative volume of issues vs. returns over the last 6 months</p>
+              </div>
+              <a href="/reports.html" class="btn btn-ghost btn-sm">Full Report</a>
+            </div>
+            <div class="card-body">
+              <div class="chart-container-wrap">
+                <canvas id="circulationTrendChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Distribution Chart -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Category Holdings</h3>
+                <p class="card-subtitle">Volume distribution across top departments</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container-wrap">
+                <canvas id="categoryDistributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions & Popular Books Grid -->
+        <div class="dashboard-grid-2">
+          <!-- Recent Transactions -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Recent Circulation Transactions</h3>
+                <p class="card-subtitle">Latest book issues, returns, and overdue statuses</p>
+              </div>
+              <a href="/return-book.html" class="btn btn-ghost btn-sm">Process Return</a>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Ref #</th>
+                    <th>Book Title</th>
+                    <th>Borrower</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recentTransactionsBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Popular Books -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Most Borrowed Volumes</h3>
+                <p class="card-subtitle">Highest circulation demand</p>
+              </div>
+            </div>
+            <div class="card-body" id="popularBooksList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/validation.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/dashboard.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
